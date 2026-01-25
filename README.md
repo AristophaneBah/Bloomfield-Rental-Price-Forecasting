@@ -159,3 +159,10 @@ That deployment project:
 ```bash
 git clone https://github.com/your-username/Bloomfield-Rental-Price-Forecasting.git
 cd Bloomfield-Rental-Price-Forecasting
+
+### Limitations
+
+- Model does not capture seasonal rental dynamics
+- Limited data volume (~500 listings)
+- Potential bias from scraped listings
+- Parking and laundry encoded as categorical proxies
