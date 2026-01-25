@@ -162,9 +162,11 @@ That deployment project:
 
 ## 10 How to Run the Project Locally
 
-### step 1  Clone the repository
 ```bash
+### step 1  Clone the repository
+
 git clone https://github.com/your-username/Bloomfield-Rental-Price-Forecasting.git
 cd Bloomfield-Rental-Price-Forecasting
+
 
 
