@@ -153,20 +153,33 @@ That deployment project:
 
 ---
 
-### Limitations
+## 10 Limitations
 
 - Model does not capture seasonal rental dynamics
 - Limited data volume (~500 listings)
 - Potential bias from scraped listings
 - Parking and laundry encoded as categorical proxies
 
-## 10 How to Run the Project Locally
+## How to Run the Project Locally
 
 ```bash
-### step 1  Clone the repository
+step 1  Clone the repository
 
 git clone https://github.com/your-username/Bloomfield-Rental-Price-Forecasting.git
 cd Bloomfield-Rental-Price-Forecasting
 
+Step 2 — Create a virtual environment
+python -m venv venv
 
+Step 3 — Activate the virtual environment
+# Windows (PowerShell)
+venv\Scripts\Activate.ps1
 
+# macOS / Linux
+source venv/bin/activate
+
+Step 4 — Install project dependencies
+pip install -r requirements.txt
+
+Step 5 — Launch Jupyter Notebook
+jupyter notebook
