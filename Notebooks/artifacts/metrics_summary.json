@@ -1,0 +1,13 @@
+{
+    "model": "RandomForestRegressor (regularized) + OneHotEncoder Pipeline",
+    "timestamp": "2026-01-24 15:03:20",
+    "cross_validation": {
+        "cv_folds": 5,
+        "MAE_mean_usd": 245.78,
+        "MAE_std_usd": 18.74,
+        "RMSE_mean_usd": 312.36,
+        "RMSE_std_usd": 24.56,
+        "R2_mean": 0.7524,
+        "R2_std": 0.0333
+    }
+}

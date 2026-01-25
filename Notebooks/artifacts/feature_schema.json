@@ -1,0 +1,16 @@
+{
+    "required_inputs": [
+        "Bedrooms",
+        "Bathrooms",
+        "Square_Feet",
+        "Laundry_Type",
+        "Location_Zone",
+        "Parking"
+    ],
+    "engineered_features_computed_in_code": [
+        "Room_Ratio",
+        "Size_per_Bedroom",
+        "Luxury_Flag"
+    ],
+    "note": "Users provide basic inputs only. Engineered features are computed automatically before prediction."
+}
