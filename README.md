@@ -153,16 +153,18 @@ That deployment project:
 
 ---
 
-## 10 How to Run the Project Locally
-
-### Step 1: Clone the repository
-```bash
-git clone https://github.com/your-username/Bloomfield-Rental-Price-Forecasting.git
-cd Bloomfield-Rental-Price-Forecasting
-
 ### Limitations
 
 - Model does not capture seasonal rental dynamics
 - Limited data volume (~500 listings)
 - Potential bias from scraped listings
 - Parking and laundry encoded as categorical proxies
+
+## 10 How to Run the Project Locally
+
+### step 1  Clone the repository
+```bash
+git clone https://github.com/your-username/Bloomfield-Rental-Price-Forecasting.git
+cd Bloomfield-Rental-Price-Forecasting
+
+
