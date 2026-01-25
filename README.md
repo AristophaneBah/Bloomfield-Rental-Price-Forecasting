@@ -1,19 +1,19 @@
-# 🏠 Bloomfield Rental Price Forecasting (NJ)
+#  Bloomfield Rental Price Forecasting (NJ)
 
-Predict **monthly apartment rent prices in Bloomfield, New Jersey** using **real listings I personally collected**, cleaned, and modeled with machine learning.
+This project predicts **monthly apartment rental prices in Bloomfield, New Jersey** using **real listings that I personally collected**, transformed into a clean dataset, and modeled with machine learning.
 
-This repository focuses on the **modeling + evaluation + saved artifacts** (deployment-ready).  
-Raw scraped data is intentionally not published.
+The project follows a **real-world, end-to-end data science workflow**, from raw data collection to deployment-ready artifacts.
 
 ---
 
-## Project Objective
+## 1️ Project Objective
 
-Predict:
+The goal of this project is to predict:
+
 - **Estimated monthly rent (USD)**
-- **Expected rent range** (uncertainty-aware estimate)
+- **Expected rent range**, based on model uncertainty
 
-### Inputs
+### Inputs Used for Prediction
 - Bedrooms
 - Bathrooms
 - Square footage
@@ -23,86 +23,139 @@ Predict:
 
 ---
 
-## Data Collection (Manual, Real Listings)
+## 2️ Data Source & Collection Strategy
 
-This dataset was **not downloaded from Kaggle** or a public dataset.
+ **Important clarification**
 
-I collected listings manually by:
+The dataset used in this project was **not downloaded from Kaggle or any public dataset**.
+
+### Manual Data Collection
+I collected the data myself by:
 - browsing real rental platforms,
-- capturing listing information (price, size, rooms, amenities, location),
-- standardizing and validating entries to reflect **real market conditions**.
+- taking **screenshots of apartment listings**,
+- identifying key attributes such as:
+  - price,
+  - square footage,
+  - number of rooms,
+  - amenities,
+  - and location information.
 
-### Data Availability
-To avoid sharing scraped/raw listing content publicly, the **raw dataset is not included** in this repo.  
-This repo includes:
-- the notebook,
-- evaluation outputs,
-- and **trained model artifacts** for reproducibility and demonstration.
-
----
-
-## Data Cleaning & Preparation
-
-Key steps:
-- standardized inconsistent categories (laundry, parking, zones),
-- handled missing values responsibly,
-- removed unrealistic or invalid records,
-- validated ranges (ex: square footage sanity checks).
+This approach ensures the data reflects **real market conditions**.
 
 ---
 
-## Feature Engineering (Leakage-Safe)
+## 3️ Data Extraction Automation (Separate Project)
+
+To make data collection scalable, I built a **separate AI-based chatbot** that:
+
+- takes screenshots or photos of rental listings as input,
+- extracts structured information using OCR and text processing,
+- converts the extracted information into **Excel / CSV files**.
+
+ This OCR and image-to-table extraction system is implemented in a **separate repository** dedicated exclusively to data ingestion.
+
+**This repository focuses on modeling and prediction only**, while data extraction happens upstream.
+
+---
+
+## 4️ Data Cleaning & Preparation
+
+Once extracted, the data was cleaned by:
+- correcting typos and inconsistent category values,
+- standardizing laundry, parking, and location zone names,
+- handling missing values,
+- removing invalid or unrealistic records.
+
+ **Final cleaned dataset used for modeling:**
+
+---
+
+## 5️ Feature Engineering (Leakage-Safe)
 
 ### Core Features
-- `Bedrooms`, `Bathrooms`, `Square_Feet`
-- `Laundry_Type`, `Parking`, `Location_Zone`
+- Bedrooms  
+- Bathrooms  
+- Square_Feet  
+- Laundry_Type  
+- Parking  
+- Location_Zone  
 
 ### Engineered Features
 - `Room_Ratio = Bedrooms / (Bathrooms + 0.001)`
 - `Size_per_Bedroom = Square_Feet / (Bedrooms + 1)`
 
-### Leakage Prevention
-`Price_per_SqFt = Rent_Price_USD / Square_Feet` was **excluded** because it directly uses the target (`Rent_Price_USD`) and would artificially inflate performance.
+###  Data Leakage Prevention
+The feature  
+`Price_per_SqFt = Rent_Price_USD / Square_Feet`  
+was **intentionally excluded**, because it directly contains the target variable and would inflate performance artificially.
 
 ---
 
-## Model Selection
+## 6️ Model Selection
 
 ### Final Model
 **RandomForestRegressor (regularized)**
 
 ### Why Random Forest?
-- captures **non-linear** relationships (zone effects, size interactions),
-- handles mixed feature types well after encoding,
-- robust for **small/medium real-world datasets**,
-- regularization reduces overfitting.
+- Captures **non-linear relationships** (rent vs size, zone effects)
+- Works well with **mixed numeric and categorical data**
+- Robust on **small to medium real-world datasets**
+- Less sensitive to outliers than linear models
 
-Regularization used:
-- max depth limits,
-- min samples split/leaf constraints.
+Regularization was applied using:
+- limited tree depth,
+- minimum samples per split,
+- minimum samples per leaf.
 
 ---
 
-## Model Evaluation
+## 7️ Model Evaluation & Validation
 
-### Cross-Validation (5-Fold)
+### Cross-Validation (5-Fold, Cost-Based)
 
 | Metric | Result |
-|------:|:------|
+|------|------|
 | MAE | **$247 ± $18** |
 | RMSE | **$314 ± $24** |
 | R² | **0.750 ± 0.033** |
 
-Interpretation: predictions are typically within **~$250** of true rent.
+ Interpretation:  
+On average, predictions are within **approximately $250** of the true rent.
 
-### Diagnostics
-- residuals centered around zero,
-- residuals vs predicted show no strong systematic pattern,
-- hypothesis tests suggest **no significant prediction bias**.
+### Residual Diagnostics
+- residual distributions are centered around zero,
+- residuals vs predictions show no systematic pattern,
+- statistical hypothesis testing confirms **no significant prediction bias**.
+
+This indicates the model generalizes well.
 
 ---
 
-## Project Structure
-<img width="607" height="421" alt="image" src="https://github.com/user-attachments/assets/41ac88f1-cf4d-422d-a873-a2caf30c58b4" />
+## 8️ Model Deployment (Separate Project)
 
+A second chatbot-style application was built for **deployment purposes**.
 
+That deployment project:
+- loads the trained model and preprocessing pipeline,
+- validates user inputs (realistic ranges),
+- returns:
+  - predicted rent,
+  - confidence intervals,
+  - and user-friendly explanations.
+
+ Deployment is handled in a **separate repository**, keeping this project focused on analysis and modeling.
+
+---
+
+## 9️ Project Structure
+
+<img width="774" height="464" alt="image" src="https://github.com/user-attachments/assets/5a6eaf86-725a-4d75-92ed-2492f7c4242e" />
+
+---
+
+## 10 How to Run the Project Locally
+
+### Step 1: Clone the repository
+```bash
+git clone https://github.com/your-username/Bloomfield-Rental-Price-Forecasting.git
+cd Bloomfield-Rental-Price-Forecasting
